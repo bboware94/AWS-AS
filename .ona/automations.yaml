@@ -43,5 +43,8 @@ tasks:
       # Print the installed AWS CLI version to confirm installation succeeded
       aws --version
 
+      # Install tree - displays folder structure in a visual tree format
+      sudo apt-get install -y tree
+
       # Print a success message to the terminal
       echo "✅ AWS CLI installed and configured!"
