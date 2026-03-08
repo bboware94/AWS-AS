@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Check if a bucket name argument was passed when running the script
+if [ -z "$1" ]; then
+    # If no bucket name is provided, show usage instructions and exit
+    echo "There needs to be a bucket name eg. ./bucket my-bucket-name"
+    exit 1
+fi
+
+# Assign the first argument passed to the script as the bucket name
+BUCKET_NAME=$1
+
+# Use the AWS CLI to create an S3 bucket with the provided name
+# --bucket: the name of the bucket to create
+# --query Location: extracts only the bucket location from the response
+# --output text: displays the result as plain text instead of JSON
+aws s3api delete-bucket \
+--bucket $BUCKET_NAME \

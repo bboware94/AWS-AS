@@ -1,0 +1,43 @@
+
+#!/usr/bin/env bash
+echo
+
+# Exit immediately if any command fails
+set -e
+
+# Check if a bucket name argument was passed when running the script
+if [ -z "$2" ]; then
+    echo "There needs to be a bucket name eg. ./put-object my-bucket-name"
+    exit 1
+fi
+
+# Assign the first argument passed to the script as the bucket name
+BUCKET_NAME=$1
+
+# Define the output directory where files will be created
+OUTPUT_DIR="./output"
+
+# Delete any existing files in the output directory for a fresh start
+rm -rf $OUTPUT_DIR
+
+# Recreate the output directory
+mkdir -p "$OUTPUT_DIR"
+
+# Generate a random number between 5 and 10 for the number of files to create
+NUM_FILES=$((RANDOM % 6 + 5))
+
+# Loop through and create the random number of files
+for i in $(seq 1 $NUM_FILES); do
+  # Fill each file with random data between 512 and 2560 bytes
+  head -c $((RANDOM % 2048 + 512)) /dev/urandom > "$OUTPUT_DIR/file_$i.txt"
+done
+
+# Display the output directory structure before syncing
+tree $OUTPUT_DIR
+
+# Sync the output directory to the S3 bucket
+echo "Syncing files to S3 bucket: $BUCKET_NAME"
+aws s3 sync $OUTPUT_DIR s3://$BUCKET_NAME
+
+# Confirm sync was successful
+echo "✅ Files successfully synced to s3://$BUCKET_NAME"
