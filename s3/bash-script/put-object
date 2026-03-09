@@ -1,1 +1,33 @@
 
+#!/usr/bin/env bash
+# Purpose: Uploads a specified file to an AWS S3 bucket using put-object
+# terminal command: ./s3/bash-script/put-object my-bucket-name /path/to/local/file.txt
+
+echo "== put-object"
+
+# Check if a bucket name argument was passed when running the script
+if [ -z "$1" ]; then
+    echo "There needs to be a bucket name eg. ./put-object my-bucket-name"
+    exit 1
+fi
+
+# Check if a filename argument was passed when running the script
+if [ -z "$2" ]; then
+    echo "There needs to be a filename argument eg. ./put-object my-bucket-name /path/to/local/file.txt"
+    exit 1
+fi
+
+# Assign the first argument passed to the script as the bucket name
+BUCKET_NAME=$1
+
+# Assign the second argument passed to the script as the local file path
+FILENAME=$2
+
+# Extract just the filename from the full path to use as the S3 object key
+OBJECT_KEY=$(basename "$FILENAME")
+
+# Upload the file to the S3 bucket
+aws s3api put-object \
+    --bucket $BUCKET_NAME \
+    --key $OBJECT_KEY \
+    --body $FILENAME

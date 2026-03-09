@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# Purpose: Lists and deletes all objects inside a specified S3 bucket
+# terminal command: ./s3/bash-script/delete-objects my-bucket-name
+
+echo "== delete-objects"
+
+# Exit immediately if any command fails
+set -e
+
+# Check if a bucket name argument was passed when running the script
+if [ -z "$1" ]; then
+    echo "There needs to be a bucket name eg. ./delete-objects my-bucket-name"
+    exit 1
+fi
+
+# Assign the first argument passed to the script as the bucket name
+BUCKET_NAME=$1
+
+# Step 1: List all object keys in the bucket
+# Step 2: Use jq to format the keys into the JSON structure AWS requires for bulk delete
+# Step 3: Save the formatted JSON to a temporary file
+aws s3api list-objects-v2 \
+    --bucket $BUCKET_NAME \
+    --query Contents[].Key \
+    | jq -n "{Objects: [inputs | .[] | {Key: .}]}" > /tmp/delete_objects.json
+
+# Step 4: Use the temporary JSON file to delete all objects from the bucket at once
+aws s3api delete-objects \
+    --bucket $BUCKET_NAME \
+    --delete file:///tmp/delete_objects.json
+
+# Confirm all objects were deleted successfully
+echo "✅ Successfully deleted all objects from s3://$BUCKET_NAME"
+
+#bash: ./s3/bash-script/delete-objects bucket-name

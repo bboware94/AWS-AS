@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Purpose: Lists all S3 buckets in your AWS account
+# terminal command: ./s3/bash-script/list-buckets
+
+echo "== list-buckets"
+
+# Exit immediately if any command fails
+set -e
+
+# List all S3 buckets in your AWS account
+aws s3api list-buckets \
+    --query 'Buckets[].Name' \
+    --output text
+
+# Confirm the list was retrieved successfully
+echo "✅ Successfully listed all buckets"

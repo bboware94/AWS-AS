@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Purpose: Lists all S3 buckets and returns the most recently created one
+
+# List all buckets and sort by date, showing the most recent one at the bottom
+aws s3api list-buckets \
+  --query 'Buckets | sort_by(@, &CreationDate)[-1].Name' \
+  --output text

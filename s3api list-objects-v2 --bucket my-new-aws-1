@@ -1,0 +1,127 @@
+{
+    "Contents": [
+        {
+            "Key": "file_1.txt",
+            "LastModified": "2026-03-09T17:43:09+00:00",
+            "ETag": "\"5a82fcdb34450eae76a328f6e8ab803e\"",
+            "ChecksumAlgorithm": [
+                "CRC64NVME"
+            ],
+            "ChecksumType": "FULL_OBJECT",
+            "Size": 800,
+            "StorageClass": "STANDARD"
+        },
+        {
+            "Key": "file_10.txt",
+            "LastModified": "2026-03-09T17:43:07+00:00",
+            "ETag": "\"9a78f357b9aa15a92d461fb026e1f6b9\"",
+            "ChecksumAlgorithm": [
+                "CRC64NVME"
+            ],
+            "ChecksumType": "FULL_OBJECT",
+            "Size": 1354,
+            "StorageClass": "STANDARD"
+        },
+        {
+            "Key": "file_2.txt",
+            "LastModified": "2026-03-09T17:43:11+00:00",
+            "ETag": "\"d3b9b10d85070c3ec8de6a31b6c3ca0f\"",
+            "ChecksumAlgorithm": [
+                "CRC64NVME"
+            ],
+            "ChecksumType": "FULL_OBJECT",
+            "Size": 1023,
+            "StorageClass": "STANDARD"
+        },
+        {
+            "Key": "file_3.txt",
+            "LastModified": "2026-03-09T17:43:12+00:00",
+            "ETag": "\"60a110da9e0cf5ac712111b0c86e108d\"",
+            "ChecksumAlgorithm": [
+                "CRC64NVME"
+            ],
+            "ChecksumType": "FULL_OBJECT",
+            "Size": 1548,
+            "StorageClass": "STANDARD"
+        },
+        {
+            "Key": "file_4.txt",
+            "LastModified": "2026-03-09T17:43:14+00:00",
+            "ETag": "\"8ce3e40942cf78f1dacdedbc9a09b2ea\"",
+            "ChecksumAlgorithm": [
+                "CRC64NVME"
+            ],
+            "ChecksumType": "FULL_OBJECT",
+            "Size": 1964,
+            "StorageClass": "STANDARD"
+        },
+        {
+            "Key": "file_5.txt",
+            "LastModified": "2026-03-09T17:43:16+00:00",
+            "ETag": "\"e18dc7656077111a90767c4f68f579bc\"",
+            "ChecksumAlgorithm": [
+                "CRC64NVME"
+            ],
+            "ChecksumType": "FULL_OBJECT",
+            "Size": 1752,
+            "StorageClass": "STANDARD"
+        },
+        {
+            "Key": "file_6.txt",
+            "LastModified": "2026-03-09T17:43:17+00:00",
+            "ETag": "\"a45adf286ffef3adcf65513326647411\"",
+            "ChecksumAlgorithm": [
+                "CRC64NVME"
+            ],
+            "ChecksumType": "FULL_OBJECT",
+            "Size": 620,
+            "StorageClass": "STANDARD"
+        },
+        {
+            "Key": "file_7.txt",
+            "LastModified": "2026-03-09T17:43:19+00:00",
+            "ETag": "\"9f93bd435afc33d6095936961118f395\"",
+            "ChecksumAlgorithm": [
+                "CRC64NVME"
+            ],
+            "ChecksumType": "FULL_OBJECT",
+            "Size": 1171,
+            "StorageClass": "STANDARD"
+        },
+        {
+            "Key": "file_8.txt",
+            "LastModified": "2026-03-09T17:43:21+00:00",
+            "ETag": "\"585d12d8c01984ebbc3f4790d5776041\"",
+            "ChecksumAlgorithm": [
+                "CRC64NVME"
+            ],
+            "ChecksumType": "FULL_OBJECT",
+            "Size": 815,
+            "StorageClass": "STANDARD"
+        },
+        {
+            "Key": "file_9.txt",
+            "LastModified": "2026-03-09T17:43:24+00:00",
+            "ETag": "\"0074163000591978e7194f3b42a8af5f\"",
+            "ChecksumAlgorithm": [
+                "CRC64NVME"
+            ],
+            "ChecksumType": "FULL_OBJECT",
+            "Size": 2307,
+            "StorageClass": "STANDARD"
+        },
+        {
+            "Key": "newfile.txt",
+            "LastModified": "2026-03-09T18:37:58+00:00",
+            "ETag": "\"d41d8cd98f00b204e9800998ecf8427e\"",
+            "ChecksumAlgorithm": [
+                "CRC64NVME"
+            ],
+            "ChecksumType": "FULL_OBJECT",
+            "Size": 0,
+            "StorageClass": "STANDARD"
+        }
+    ],
+    "RequestCharged": null,
+    "Prefix": ""
+}
