@@ -3,48 +3,58 @@ tasks:
   aws-cli:
     # Display name shown in the Ona dashboard
     name: Install AWS CLI
-
     # Automatically run this task every time the workspace starts
     triggeredBy:
       - postEnvironmentStart
-
     # The shell commands to run when this task is triggered
     command: |
       # Navigate to /tmp folder - a safe temporary directory for downloads
       cd /tmp
-
       # Download the AWS CLI version 2 installer zip file from Amazon
       curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-
       # Unzip the downloaded file (-o flag overwrites without asking)
       unzip -o awscliv2.zip
-
       # Run the installer with --update flag to update if already installed
       sudo ./aws/install --update
-
       # Add /usr/local/bin to PATH so the 'aws' command can be found in terminal
       echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
-
       # Enable AWS CLI auto-prompt (suggests commands as you type)
       echo 'export AWS_CLI_AUTO_PROMPT=on-partial' >> ~/.bashrc
-
       # Configure AWS Access Key ID using the secret stored in Ona
       aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-
       # Configure AWS Secret Access Key using the secret stored in Ona
       aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-
       # Configure the default AWS region using the secret stored in Ona
       aws configure set default.region $AWS_DEFAULT_REGION
-
       # Reload ~/.bashrc so the new environment variables take effect immediately
       source ~/.bashrc
-
       # Print the installed AWS CLI version to confirm installation succeeded
       aws --version
-
       # Install tree - displays folder structure in a visual tree format
       sudo apt-get install -y tree
-
       # Print a success message to the terminal
       echo "✅ AWS CLI installed and configured!"
+
+  # Define a task named 'install-terraform'
+  install-terraform:
+    # Display name shown in the Ona dashboard
+    name: Install Terraform
+    # Run after aws-cli task completes
+    dependsOn:
+      - aws-cli
+    # The shell commands to run when this task is triggered
+    command: |
+      # Install required dependencies for Terraform
+      sudo apt-get install -y gnupg software-properties-common curl
+      # Add HashiCorp GPG key to verify the installation
+      curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+      # Add HashiCorp repository to apt sources
+      echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+      # Update apt package list
+      sudo apt-get update
+      # Install Terraform
+      sudo apt-get install -y terraform
+      # Verify Terraform was installed successfully
+      terraform --version
+      # Print a success message
+      echo "✅ Terraform installed successfully!"
