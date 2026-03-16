@@ -1,22 +1,27 @@
+cat > main.tf << 'EOF'
+# Define the required provider and version
 terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "6.36.0"
+      version = "~> 5.0"
     }
   }
 }
 
+# Configure the AWS provider
+# Region is automatically picked up from AWS credentials/environment variables
+provider "aws" {}
+
+# Create an S3 bucket
 resource "aws_s3_bucket" "default" {
+  bucket = "my-terraform-bucket-12345"
 }
 
-resource "aws_s3_bucket_object" "object" {
-  bucket = resource.aws_s3_bucket.default
+# Upload a file to the S3 bucket
+resource "aws_s3_object" "object" {
+  bucket = aws_s3_bucket.default.id
   key    = "myfile.txt"
   source = "myfile.txt"
-
-  # The filemd5() function is available in Terraform 0.11.12 and later
-  # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
-  # etag = "${md5(file("path/to/file"))}"
-  etag = filemd5("path/to/file")
 }
+EOF

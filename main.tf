@@ -8,22 +8,19 @@ terraform {
   }
 }
 
-# Configure the AWS provider with region
+# Configure the AWS provider
 provider "aws" {
   region = "us-east-1"
 }
 
-# Create an S3 bucket using Terraform
-resource "aws_s3_bucket" "my_bucket" {
-  bucket = "my-terraform-bucket-${random_id.bucket_id.hex}"
-
-  tags = {
-    Name        = "My Terraform Bucket"
-    Environment = "Dev"
-  }
+# Create an S3 bucket
+resource "aws_s3_bucket" "default" {
+  bucket = "my-terraform-bucket-12345"
 }
 
-# Generate a random ID for the bucket name to make it unique
-resource "random_id" "bucket_id" {
-  byte_length = 4
+# Upload a file to the S3 bucket
+resource "aws_s3_object" "object" {
+  bucket = aws_s3_bucket.default.id
+  key    = "myfile.txt"
+  source = "myfile.txt"
 }
