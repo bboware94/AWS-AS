@@ -1,4 +1,3 @@
-cat > main.tf << 'EOF'
 # Define the required provider and version
 terraform {
   required_providers {
@@ -10,18 +9,20 @@ terraform {
 }
 
 # Configure the AWS provider
-# Region is automatically picked up from AWS credentials/environment variables
-provider "aws" {}
+provider "aws" {
+  region = "ap-southeast-2"
+}
 
 # Create an S3 bucket
 resource "aws_s3_bucket" "default" {
-  bucket = "my-terraform-bucket-12345"
+  bucket = "my-terraform-bucket-bboware"
 }
 
 # Upload a file to the S3 bucket
 resource "aws_s3_object" "object" {
-  bucket = aws_s3_bucket.default.id
+  bucket = aws_s3_bucket.default.id 
   key    = "myfile.txt"
   source = "myfile.txt"
+  
+  etag = filemd5("myfile.txt") # Calculate the MD5 hash of the file and use it as the ETag
 }
-EOF
