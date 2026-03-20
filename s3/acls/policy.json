@@ -1,0 +1,16 @@
+{
+    "Owner": {
+        "DisplayName": "bismarkoware",
+        "ID": "c0df095115bb3fe75cb8a38de5f162d91faa0b63a609a73f32bd040975287b7e"
+    },
+    "Grants": [
+        {
+            "Grantee": {
+                "DisplayName": "boware",
+                "ID": "a982def8b9731310f520bfaa3cecfcb0aed499e491ed6e8eb98b3aca34dabf10",
+                "Type": "CanonicalUser"
+            },
+                    "Permission": "FULL_CONTROL"
+                }
+            ]
+        }
